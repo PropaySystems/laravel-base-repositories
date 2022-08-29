@@ -139,6 +139,7 @@ class BaseRepository
      * @param  array  $data
      * @param  int  $perPage
      * @return LengthAwarePaginator
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
