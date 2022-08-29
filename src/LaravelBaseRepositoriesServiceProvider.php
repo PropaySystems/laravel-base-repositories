@@ -17,9 +17,9 @@ class LaravelBaseRepositoriesServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-base-repositories')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-base-repositories_table')
-            ->hasCommand(LaravelBaseRepositoriesCommand::class);
+            ->hasConfigFile();
+//            ->hasViews()
+//            ->hasMigration('create_laravel-base-repositories_table')
+//            ->hasCommand(LaravelBaseRepositoriesCommand::class);
     }
 }

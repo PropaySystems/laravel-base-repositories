@@ -1,10 +1,12 @@
 <?php
 
-namespace PropaySystems\LaravelReminders\Repositories\Base;
+namespace PropaySystems\LaravelBaseRepositories\Repositories\Base;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class BaseRepository
 {
@@ -24,9 +26,10 @@ class BaseRepository
      * @param  array  $attributes
      * @return mixed
      */
-    public function create(array $attributes)
+    public function create(array $attributes): object
     {
-        return $this->model->create($attributes);
+        return $this->model
+            ->create($attributes);
     }
 
     /**
@@ -36,7 +39,8 @@ class BaseRepository
      */
     public function update(array $attributes, int $id): object
     {
-        return tap($this->model->find($id))->update($attributes);
+        return tap($this->model->find($id))
+            ->update($attributes);
     }
 
     /**
@@ -44,9 +48,10 @@ class BaseRepository
      * @param  array  $attributes
      * @return mixed
      */
-    public function updateOrCreate(array $search, array $attributes)
+    public function updateOrCreate(array $search, array $attributes): mixed
     {
-        return $this->model->updateOrCreate($search, $attributes);
+        return $this->model
+            ->updateOrCreate($search, $attributes);
     }
 
     /**
@@ -56,9 +61,12 @@ class BaseRepository
      * @param  string  $sortBy
      * @return mixed
      */
-    public function all($columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc')
+    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
-        return $this->model->with($with)->orderBy($orderBy, $sortBy)->get($columns);
+        return $this->model
+            ->with($with)
+            ->orderBy($orderBy, $sortBy)
+            ->get($columns);
     }
 
     /**
@@ -66,9 +74,11 @@ class BaseRepository
      * @param  array  $with
      * @return mixed
      */
-    public function find(int $id, $with = [])
+    public function find(int $id, array $with = []): mixed
     {
-        return $this->model->with($with)->find($id);
+        return $this->model
+            ->with($with)
+            ->find($id);
     }
 
     /**
@@ -77,9 +87,10 @@ class BaseRepository
      *
      * @throws ModelNotFoundException
      */
-    public function findOneOrFail(int $id)
+    public function findOneOrFail(int $id): mixed
     {
-        return $this->model->findOrFail($id);
+        return $this->model
+            ->findOrFail($id);
     }
 
     /**
@@ -89,9 +100,13 @@ class BaseRepository
      * @param  string  $sortBy
      * @return mixed
      */
-    public function findBy(mixed $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc')
+    public function findBy(mixed $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
-        return $this->model->where($data)->with($with)->orderBy($orderBy, $sortBy)->get();
+        return $this->model
+            ->where($data)
+            ->with($with)
+            ->orderBy($orderBy, $sortBy)
+            ->get();
     }
 
     /**
@@ -99,9 +114,12 @@ class BaseRepository
      * @param  array  $with
      * @return mixed
      */
-    public function findOneBy(array $data, array $with = [])
+    public function findOneBy(array $data, array $with = []): mixed
     {
-        return $this->model->where($data)->with($with)->first();
+        return $this->model
+            ->where($data)
+            ->with($with)
+            ->first();
     }
 
     /**
@@ -110,17 +128,21 @@ class BaseRepository
      *
      * @throws ModelNotFoundException
      */
-    public function findOneByOrFail(array $data)
+    public function findOneByOrFail(array $data): mixed
     {
-        return $this->model->where($data)->firstOrFail();
+        return $this->model
+            ->where($data)
+            ->firstOrFail();
     }
 
     /**
      * @param  array  $data
      * @param  int  $perPage
      * @return LengthAwarePaginator
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function paginateArrayResults(array $data, int $perPage = 50)
+    public function paginateArrayResults(array $data, int $perPage = 50): LengthAwarePaginator
     {
         $page = request()->get('page', 1);
         $offset = ($page * $perPage) - $perPage;
@@ -143,18 +165,25 @@ class BaseRepository
      */
     public function delete(int $id): bool
     {
-        return $this->model->find($id)->delete();
+        return $this->model
+            ->find($id)
+            ->delete();
     }
 
     /**
+     * @param  string  $column
      * @param  array  $data
      * @param  array  $with
      * @param  string  $orderBy
      * @param  string  $sortBy
      * @return mixed
      */
-    public function whereIn(string $column, array $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc')
+    public function whereIn(string $column, array $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
-        return $this->model->whereIn($column, $data)->with($with)->orderBy($orderBy, $sortBy)->get();
+        return $this->model
+            ->whereIn($column, $data)
+            ->with($with)
+            ->orderBy($orderBy, $sortBy)
+            ->get();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace PropaySystems\LaravelReminders\Repositories\Base\Interfaces;
+namespace PropaySystems\LaravelBaseRepositories\Repositories\Base\Interfaces;
 
 interface BaseRepositoryInterface
 {
@@ -10,9 +10,9 @@ interface BaseRepositoryInterface
 
     public function updateOrCreate(array $search, array $attributes);
 
-    public function all($columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'desc');
+    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'desc');
 
-    public function find(int $id, $with = []);
+    public function find(int $id, array $with = []);
 
     public function findOneOrFail(int $id);
 
