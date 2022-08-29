@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace PropaySystems\LaravelBaseRepositories\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelBaseRepositoriesCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-base-repositories';
 
     public $description = 'My command';
 
