@@ -2,9 +2,9 @@
 
 namespace PropaySystems\LaravelBaseRepositories;
 
+use PropaySystems\LaravelBaseRepositories\Commands\LaravelBaseRepositoriesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use PropaySystems\LaravelBaseRepositories\Commands\LaravelBaseRepositoriesCommand;
 
 class LaravelBaseRepositoriesServiceProvider extends PackageServiceProvider
 {
