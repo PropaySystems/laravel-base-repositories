@@ -24,7 +24,7 @@ class BaseRepository
 
     /**
      * @param  array  $attributes
-     * @return mixed
+     * @return object
      */
     public function create(array $attributes): object
     {
@@ -35,7 +35,7 @@ class BaseRepository
     /**
      * @param  array  $attributes
      * @param  int  $id
-     * @return mixed
+     * @return object
      */
     public function update(array $attributes, int $id): object
     {
