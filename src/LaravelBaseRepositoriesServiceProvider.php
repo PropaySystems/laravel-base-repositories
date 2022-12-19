@@ -2,7 +2,7 @@
 
 namespace PropaySystems\LaravelBaseRepositories;
 
-use PropaySystems\LaravelBaseRepositories\Commands\LaravelBaseRepositoriesCommand;
+use PropaySystems\LaravelBaseRepositories\Commands\CreateClassesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,9 +17,7 @@ class LaravelBaseRepositoriesServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-base-repositories')
-            ->hasConfigFile();
-//            ->hasViews()
-//            ->hasMigration('create_laravel-base-repositories_table')
-//            ->hasCommand(LaravelBaseRepositoriesCommand::class);
+            ->hasConfigFile()
+            ->hasCommand(CreateClassesCommand::class);
     }
 }

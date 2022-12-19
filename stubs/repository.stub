@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use PropaySystems\LaravelBaseRepositories\Repositories\Base\BaseRepository;
+use {{ interface_path }};
+
+class {{ file }} extends BaseRepository implements {{ interface }}
+{
+    /**
+     * Repository constructor.
+     */
+    public function __construct({{ model }} $model)
+    {
+        parent::__construct($model);
+    }
+}

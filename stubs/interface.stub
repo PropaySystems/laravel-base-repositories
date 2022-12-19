@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use PropaySystems\LaravelBaseRepositories\Repositories\Base\Interfaces\BaseRepositoryInterface;
+
+interface {{ file }} extends BaseRepositoryInterface
+{
+    //
+}
