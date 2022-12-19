@@ -4,7 +4,6 @@ namespace PropaySystems\LaravelBaseRepositories;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\NoReturn;
 use PropaySystems\LaravelBaseRepositories\Helpers\FileHelper;
 
 class LaravelBaseRepositories
