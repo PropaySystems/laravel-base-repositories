@@ -50,7 +50,7 @@ class LaravelBaseRepositories
     public function createInterfaceFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . 'Interfaces';
+        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . config('base-repositories.base_interface_path');
 
         FileHelper::createDirectory($folderPath);
 
@@ -64,7 +64,7 @@ class LaravelBaseRepositories
     public function createInterfaceClass(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . 'Interfaces';
+        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . config('base-repositories.base_interface_path');
         $fullPath = $folderPath . DIRECTORY_SEPARATOR . FileHelper::stripPhp($parts['file'] . 'Interface') . '.php';
 
         if (!File::exists($fullPath)) {
@@ -140,7 +140,7 @@ class LaravelBaseRepositories
         $contents = '';
         foreach (File::directories(config('base-repositories.base_repository_path')) as $directory) {
 
-            $baseInterfacePath = $directory . DIRECTORY_SEPARATOR . 'Interfaces' . DIRECTORY_SEPARATOR;
+            $baseInterfacePath = $directory . DIRECTORY_SEPARATOR . config('base-repositories.base_interface_path') . DIRECTORY_SEPARATOR;
 
             foreach (File::files($directory) as $repository) {
 

@@ -33,7 +33,7 @@ class CreateClassesCommand extends Command
 
         if ($createService) {
             // Service
-            $this->laravelBaseRepositories->createServiceFolder(FileHelper::appendClassName($name));
+            $this->laravelBaseRepositories->createServiceFolder(FileHelper::appendClassName($name), config('base-repositories.append_service_name'));
             $service = $this->laravelBaseRepositories->createServiceClass(FileHelper::appendClassName($name));
 
             if (!$service) {
@@ -49,8 +49,8 @@ class CreateClassesCommand extends Command
             } else {
 
                 // Interface
-                $this->laravelBaseRepositories->createInterfaceFolder(FileHelper::appendClassName($name, 'Repository'));
-                $interface = $this->laravelBaseRepositories->createInterfaceClass(FileHelper::appendClassName($name, 'Repository'));
+                $this->laravelBaseRepositories->createInterfaceFolder(FileHelper::appendClassName($name, config('base-repositories.append_repository_name')));
+                $interface = $this->laravelBaseRepositories->createInterfaceClass(FileHelper::appendClassName($name, config('base-repositories.append_repository_name')));
 
                 if (!$interface) {
                     $this->error('Repository interface class already exist!');
@@ -59,8 +59,8 @@ class CreateClassesCommand extends Command
                 }
 
                 // Repository
-                $this->laravelBaseRepositories->createRepositoryFolder(FileHelper::appendClassName($name, 'Repository'));
-                $repository = $this->laravelBaseRepositories->createRepositoryClass(FileHelper::appendClassName($name, 'Repository'), $interface, $model);
+                $this->laravelBaseRepositories->createRepositoryFolder(FileHelper::appendClassName($name, config('base-repositories.append_repository_name')));
+                $repository = $this->laravelBaseRepositories->createRepositoryClass(FileHelper::appendClassName($name, config('base-repositories.append_repository_name')), $interface, $model);
 
                 if (!$repository) {
                     $this->error('Repository class already exist!');
