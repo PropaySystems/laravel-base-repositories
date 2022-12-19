@@ -13,12 +13,11 @@ class CreateClassesCommand extends Command
     public $description = 'Create the relevant service or repository classes.';
 
     /**
-     * @param LaravelBaseRepositories $laravelBaseRepositories
+     * @param  LaravelBaseRepositories  $laravelBaseRepositories
      */
     public function __construct(
         protected LaravelBaseRepositories $laravelBaseRepositories
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -29,14 +28,14 @@ class CreateClassesCommand extends Command
         $createRepository = $this->option('repository');
         $model = $this->option('model');
 
-        $this->comment('Class Name: ' . $name);
+        $this->comment('Class Name: '.$name);
 
         if ($createService) {
             // Service
             $this->laravelBaseRepositories->createServiceFolder(FileHelper::appendClassName($name));
             $service = $this->laravelBaseRepositories->createServiceClass(FileHelper::appendClassName($name));
 
-            if (!$service) {
+            if (! $service) {
                 $this->error('Service class already exist!');
             } else {
                 $this->comment('Service class has been created!');
@@ -44,15 +43,14 @@ class CreateClassesCommand extends Command
         }
 
         if ($createRepository) {
-            if (!$model) {
+            if (! $model) {
                 $this->error('Model cannot be empty!');
             } else {
-
                 // Interface
                 $this->laravelBaseRepositories->createInterfaceFolder(FileHelper::appendClassName($name, 'Repository'));
                 $interface = $this->laravelBaseRepositories->createInterfaceClass(FileHelper::appendClassName($name, 'Repository'));
 
-                if (!$interface) {
+                if (! $interface) {
                     $this->error('Repository interface class already exist!');
                 } else {
                     $this->comment('Repository interface class has been created!');
@@ -62,7 +60,7 @@ class CreateClassesCommand extends Command
                 $this->laravelBaseRepositories->createRepositoryFolder(FileHelper::appendClassName($name, 'Repository'));
                 $repository = $this->laravelBaseRepositories->createRepositoryClass(FileHelper::appendClassName($name, 'Repository'), $interface, $model);
 
-                if (!$repository) {
+                if (! $repository) {
                     $this->error('Repository class already exist!');
                 } else {
                     $this->comment('Repository class has been created!');
@@ -71,7 +69,7 @@ class CreateClassesCommand extends Command
                 // Provider
                 $provider = $this->laravelBaseRepositories->createProviderClass();
 
-                if (!$provider) {
+                if (! $provider) {
                     $this->error('Repository provider class already exist!');
                 } else {
                     $this->comment('Repository provider class has been created/linked!');
@@ -80,7 +78,7 @@ class CreateClassesCommand extends Command
                 // Provider Entries
                 $providerEntries = $this->laravelBaseRepositories->addProviderEntries();
 
-                if (!$providerEntries) {
+                if (! $providerEntries) {
                     $this->error('Repository provider classes could not be linked!');
                 } else {
                     $this->comment('Repository provider classes has been linked!');

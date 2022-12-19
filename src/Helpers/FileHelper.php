@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 class FileHelper
 {
     /**
-     * @param string $file
+     * @param  string  $file
      * @return array
      */
     public static function splitFile(string $file): array
@@ -19,18 +19,18 @@ class FileHelper
 
         return [
             'path' => $path,
-            'file' => $fileName . '.php',
-            'fileName' => $fileName
+            'file' => $fileName.'.php',
+            'fileName' => $fileName,
         ];
     }
 
     /**
-     * @param string $path
+     * @param  string  $path
      * @return string
      */
     public static function createDirectory(string $path): string
     {
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             File::makeDirectory($path, 0755, true);
         }
 
@@ -38,7 +38,7 @@ class FileHelper
     }
 
     /**
-     * @param string $string
+     * @param  string  $string
      * @return string
      */
     public static function convertBackslash(string $string): string
@@ -47,7 +47,7 @@ class FileHelper
     }
 
     /**
-     * @param string $string
+     * @param  string  $string
      * @return string
      */
     public static function buildNamespace(string $string): string
@@ -56,8 +56,8 @@ class FileHelper
     }
 
     /**
-     * @param string $string
-     * @param string $replace
+     * @param  string  $string
+     * @param  string  $replace
      * @return string
      */
     public static function stripPhp(string $string, string $replace = ''): string
@@ -66,12 +66,12 @@ class FileHelper
     }
 
     /**
-     * @param string $name
-     * @param string $class
+     * @param  string  $name
+     * @param  string  $class
      * @return string
      */
     public static function appendClassName(string $name, string $class = 'Service'): string
     {
-        return str_replace($class, '', $name) . $class;
+        return str_replace($class, '', $name).$class;
     }
 }

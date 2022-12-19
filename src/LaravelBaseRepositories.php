@@ -4,19 +4,18 @@ namespace PropaySystems\LaravelBaseRepositories;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\NoReturn;
 use PropaySystems\LaravelBaseRepositories\Helpers\FileHelper;
 
 class LaravelBaseRepositories
 {
     /**
-     * @param string $file
+     * @param  string  $file
      * @return bool|string
      */
     public function createServiceFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_service_path') . $parts['path'];
+        $folderPath = config('base-repositories.base_service_path').$parts['path'];
 
         FileHelper::createDirectory($folderPath);
 
@@ -24,16 +23,16 @@ class LaravelBaseRepositories
     }
 
     /**
-     * @param string $file
+     * @param  string  $file
      * @return bool|string
      */
     public function createServiceClass(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_service_path') . $parts['path'];
-        $fullPath = $folderPath . $parts['file'];
+        $folderPath = config('base-repositories.base_service_path').$parts['path'];
+        $fullPath = $folderPath.$parts['file'];
 
-        if (!File::exists($fullPath)) {
+        if (! File::exists($fullPath)) {
             $content = File::get(base_path('vendor/propaysystems/laravel-base-repositories/stubs/service.stub'));
             File::put($fullPath, $this->replaceVariables($content, FileHelper::buildNamespace($folderPath), $parts['fileName']));
         } else {
@@ -44,13 +43,13 @@ class LaravelBaseRepositories
     }
 
     /**
-     * @param string $file
+     * @param  string  $file
      * @return bool|string
      */
     public function createInterfaceFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . 'Interfaces';
+        $folderPath = config('base-repositories.base_repository_path').$parts['path'].'Interfaces';
 
         FileHelper::createDirectory($folderPath);
 
@@ -58,18 +57,18 @@ class LaravelBaseRepositories
     }
 
     /**
-     * @param string $file
+     * @param  string  $file
      * @return bool|string
      */
     public function createInterfaceClass(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . 'Interfaces';
-        $fullPath = $folderPath . DIRECTORY_SEPARATOR . FileHelper::stripPhp($parts['file'] . 'Interface') . '.php';
+        $folderPath = config('base-repositories.base_repository_path').$parts['path'].'Interfaces';
+        $fullPath = $folderPath.DIRECTORY_SEPARATOR.FileHelper::stripPhp($parts['file'].'Interface').'.php';
 
-        if (!File::exists($fullPath)) {
+        if (! File::exists($fullPath)) {
             $contents = File::get(base_path('vendor/propaysystems/laravel-base-repositories/stubs/interface.stub'));
-            File::put($fullPath, $this->replaceVariables($contents, FileHelper::buildNamespace($folderPath), $parts['fileName'] . 'Interface'));
+            File::put($fullPath, $this->replaceVariables($contents, FileHelper::buildNamespace($folderPath), $parts['fileName'].'Interface'));
         } else {
             return false;
         }
@@ -80,7 +79,7 @@ class LaravelBaseRepositories
     public function createRepositoryFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'];
+        $folderPath = config('base-repositories.base_repository_path').$parts['path'];
 
         FileHelper::createDirectory($folderPath);
 
@@ -88,18 +87,18 @@ class LaravelBaseRepositories
     }
 
     /**
-     * @param string $file
-     * @param string $interfacePath
-     * @param string $model
+     * @param  string  $file
+     * @param  string  $interfacePath
+     * @param  string  $model
      * @return bool|string
      */
     public function createRepositoryClass(string $file, string $interfacePath, string $model): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'];
-        $fullPath = $folderPath . $parts['file'];
+        $folderPath = config('base-repositories.base_repository_path').$parts['path'];
+        $fullPath = $folderPath.$parts['file'];
 
-        if (!File::exists($fullPath)) {
+        if (! File::exists($fullPath)) {
             $contents = File::get(base_path('vendor/propaysystems/laravel-base-repositories/stubs/repository.stub'));
             File::put($fullPath, $this->replaceVariables(
                 $contents,
@@ -107,7 +106,7 @@ class LaravelBaseRepositories
                 $parts['fileName'],
                 FileHelper::stripPhp(FileHelper::splitFile($interfacePath)['fileName']),
                 FileHelper::buildNamespace($interfacePath),
-                '\\' . FileHelper::buildNamespace($model)
+                '\\'.FileHelper::buildNamespace($model)
             ));
         } else {
             return false;
@@ -123,7 +122,7 @@ class LaravelBaseRepositories
     {
         $fullPath = app_path('Providers/RepositoryServiceProvider.php');
 
-        if (!File::exists($fullPath)) {
+        if (! File::exists($fullPath)) {
             File::put($fullPath, File::get(base_path('vendor/propaysystems/laravel-base-repositories/stubs/provider.stub')));
         }
 
@@ -139,19 +138,16 @@ class LaravelBaseRepositories
 
         $contents = '';
         foreach (File::directories(config('base-repositories.base_repository_path')) as $directory) {
-
-            $baseInterfacePath = $directory . DIRECTORY_SEPARATOR . 'Interfaces' . DIRECTORY_SEPARATOR;
+            $baseInterfacePath = $directory.DIRECTORY_SEPARATOR.'Interfaces'.DIRECTORY_SEPARATOR;
 
             foreach (File::files($directory) as $repository) {
-
                 $parts = FileHelper::splitFile($repository);
 
-                $interfacePath = FileHelper::convertBackslash(ucfirst($baseInterfacePath . FileHelper::stripPhp($parts['fileName']) . 'Interface::class'));
+                $interfacePath = FileHelper::convertBackslash(ucfirst($baseInterfacePath.FileHelper::stripPhp($parts['fileName']).'Interface::class'));
                 $repositoryPath = FileHelper::convertBackslash(ucfirst(FileHelper::stripPhp($repository, '::class')));
 
-                $contents .= "        \$this->app->bind(\\$interfacePath, \\$repositoryPath);" . PHP_EOL;
+                $contents .= "        \$this->app->bind(\\$interfacePath, \\$repositoryPath);".PHP_EOL;
             }
-
         }
 
         $builtContent = str_replace('{text_here}', $contents, File::get(base_path('vendor/propaysystems/laravel-base-repositories/stubs/provider.stub')));
@@ -165,9 +161,9 @@ class LaravelBaseRepositories
      * @param $content
      * @param $namespace
      * @param $fileName
-     * @param null $interface
-     * @param null $interfacePath
-     * @param null $model
+     * @param  null  $interface
+     * @param  null  $interfacePath
+     * @param  null  $model
      * @return string
      */
     public function replaceVariables($content, $namespace, $fileName, $interface = null, $interfacePath = null, $model = null): string
