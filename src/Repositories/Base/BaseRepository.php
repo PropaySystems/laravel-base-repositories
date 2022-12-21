@@ -59,9 +59,9 @@ class BaseRepository
      * @param  array  $with
      * @param  string  $orderBy
      * @param  string  $sortBy
-     * @return mixed
+     * @return array|\Illuminate\Database\Eloquent\Collection
      */
-    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
+    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): array|\Illuminate\Database\Eloquent\Collection
     {
         return $this->model
             ->with($with)
