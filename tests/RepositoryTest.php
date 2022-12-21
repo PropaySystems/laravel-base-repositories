@@ -28,3 +28,9 @@ test('can interface folder be created', function () {
 
     $this->assertStringContainsString('Users'.DIRECTORY_SEPARATOR.config('base-repositories.base_interface_path'), $path);
 });
+
+//test('can provider class be created', function () {
+//    $path = $this->service->createProviderClass();
+//
+//    $this->assertStringContainsString('RepositoryServiceProvider', $path);
+//});
