@@ -15,7 +15,7 @@ test('can split namespaced name to get path', function () {
 test('can split namespaced name to get file', function () {
     $path = \PropaySystems\LaravelBaseRepositories\Helpers\FileHelper::splitFile($this->file);
 
-    $this->assertStringContainsString($this->fileName . '.php', $path['file']);
+    $this->assertStringContainsString($this->fileName.'.php', $path['file']);
 });
 
 test('can split namespaced name to get file name', function () {
