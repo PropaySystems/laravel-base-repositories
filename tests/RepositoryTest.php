@@ -8,7 +8,7 @@ beforeEach(function () {
 test('can service folder be created', function () {
     $path = $this->service->createServiceFolder($this->file);
 
-    $this->assertStringContainsString(config('base-repositories.base_service_path') . 'Users', $path);
+    $this->assertStringContainsString(config('base-repositories.base_service_path').'Users', $path);
 });
 
 //test('can service class be created', function () {
@@ -20,11 +20,11 @@ test('can service folder be created', function () {
 test('can repository folder be created', function () {
     $path = $this->service->createRepositoryFolder($this->file);
 
-    $this->assertStringContainsString(config('base-repositories.base_repository_path') . 'Users', $path);
+    $this->assertStringContainsString(config('base-repositories.base_repository_path').'Users', $path);
 });
 
 test('can interface folder be created', function () {
     $path = $this->service->createInterfaceFolder($this->file);
 
-    $this->assertStringContainsString('Users' . DIRECTORY_SEPARATOR . config('base-repositories.base_interface_path'), $path);
+    $this->assertStringContainsString('Users'.DIRECTORY_SEPARATOR.config('base-repositories.base_interface_path'), $path);
 });

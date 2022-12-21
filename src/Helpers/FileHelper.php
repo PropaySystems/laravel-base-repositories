@@ -15,7 +15,7 @@ class FileHelper
         $pathParts = explode(DIRECTORY_SEPARATOR, $file);
 
         $fileName = end($pathParts);
-        $path = str_replace(DIRECTORY_SEPARATOR . $fileName, '', $file);
+        $path = str_replace(DIRECTORY_SEPARATOR.$fileName, '', $file);
 
         return [
             'path' => $path,
