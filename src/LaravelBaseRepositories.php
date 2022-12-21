@@ -49,7 +49,7 @@ class LaravelBaseRepositories
     public function createInterfaceFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
-        $folderPath = config('base-repositories.base_repository_path') . $parts['path'] . DIRECTORY_SEPARATOR . config('base-repositories.base_interface_path');
+        $folderPath = config('base-repositories.base_repository_path').$parts['path'].DIRECTORY_SEPARATOR.config('base-repositories.base_interface_path');
 
         FileHelper::createDirectory($folderPath);
 
