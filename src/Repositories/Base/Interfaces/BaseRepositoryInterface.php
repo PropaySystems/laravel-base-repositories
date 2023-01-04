@@ -6,6 +6,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseRepositoryInterface
 {
+    public function newModelInstance(): object;
+
     public function create(array $attributes): object;
 
     public function update(array $attributes, int $id): object;

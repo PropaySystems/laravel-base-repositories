@@ -23,6 +23,14 @@ class BaseRepository
     }
 
     /**
+     * @return object
+     */
+    public function newModelInstance(): object
+    {
+        return new $this->model();
+    }
+
+    /**
      * @param  array  $attributes
      * @return object
      */
