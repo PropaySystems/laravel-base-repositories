@@ -32,7 +32,7 @@ class CreateClassesCommand extends Command
 
         if ($createService) {
             // Service
-            $this->laravelBaseRepositories->createServiceFolder(FileHelper::appendClassName($name), config('base-repositories.append_service_name'));
+            $this->laravelBaseRepositories->createServiceFolder(FileHelper::appendClassName($name));
             $service = $this->laravelBaseRepositories->createServiceClass(FileHelper::appendClassName($name));
 
             if (! $service) {

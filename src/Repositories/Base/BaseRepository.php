@@ -47,8 +47,8 @@ class BaseRepository
      */
     public function update(array $attributes, int $id): object
     {
-        return tap($this->model->find($id))
-            ->update($attributes);
+        // @phpstan-ignore-next-line
+        return tap($this->model->find($id))->update($attributes);
     }
 
     /**
