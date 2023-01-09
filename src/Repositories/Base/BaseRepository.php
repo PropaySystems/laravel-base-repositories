@@ -17,7 +17,8 @@ class BaseRepository
      */
     public function __construct(
         protected Model $model
-    ) {}
+    ) {
+    }
 
     /**
      * @return object
