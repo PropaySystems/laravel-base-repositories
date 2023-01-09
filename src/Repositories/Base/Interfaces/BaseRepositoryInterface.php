@@ -2,11 +2,14 @@
 
 namespace PropaySystems\LaravelBaseRepositories\Repositories\Base\Interfaces;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseRepositoryInterface
 {
     public function newModelInstance(): object;
+
+    public function model(): Model;
 
     public function create(array $attributes): object;
 
