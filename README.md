@@ -5,7 +5,9 @@
 
 # UNDER DEVELOPMENT AND TESTING
 
-This is the base classes for the repository pattern we use. In your own repository class you have to extend the BaseRepository and implement your custom interface. In your custom interface you have to extend the BaseRepositoryInterface
+This is the base classes for the repository pattern we use. In your own repository classes you have to extend the BaseRepository and implement your custom 
+interface. In your custom interface you have to extend the BaseRepositoryInterface. This will give you a collection of commonly used queries and function 
+that you don't need to duplicate each time. 
 
 ```php
 class AddressRepository extends BaseRepository implements AddressRepositoryInterface
