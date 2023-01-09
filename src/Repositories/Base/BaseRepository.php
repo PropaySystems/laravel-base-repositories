@@ -10,16 +10,14 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class BaseRepository
 {
-    protected Model $model;
-
     /**
      * BaseRepository constructor.
      *
      * @param  Model  $model
      */
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
+    public function __construct(
+        protected Model $model
+    ) {
     }
 
     /**
@@ -28,6 +26,14 @@ class BaseRepository
     public function newModelInstance(): object
     {
         return new $this->model();
+    }
+
+    /**
+     * @return Model
+     */
+    public function model(): Model
+    {
+        return $this->model;
     }
 
     /**
