@@ -3,7 +3,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/propaysystems/laravel-base-repositories/run-tests?label=tests)](https://github.com/propaysystems/laravel-base-repositories/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/propaysystems/laravel-base-repositories/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/propaysystems/laravel-base-repositories/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 
-# UNDER DEVELOPMENT AND TESTING
+# UNDER DEVELOPMENT AND TESTING - WE WILL ADD PROPER DOCUMENTATION WITH v1 STABLE RELEASE
 
 This is the base classes for the repository pattern we use. In your own repository classes you have to extend the BaseRepository and implement your custom 
 interface. In your custom interface you have to extend the BaseRepositoryInterface. This will give you a collection of commonly used queries and function 
@@ -24,23 +24,10 @@ You can install the package via composer:
 composer require propaysystems/laravel-base-repositories
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-base-repositories-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-base-repositories-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-base-repositories-views"
 ```
 
 ## Usage
