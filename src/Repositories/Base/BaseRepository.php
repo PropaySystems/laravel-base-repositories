@@ -2,6 +2,7 @@
 
 namespace PropaySystems\LaravelBaseRepositories\Repositories\Base;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -21,9 +22,9 @@ class BaseRepository
     }
 
     /**
-     * @return object
+     * @return Model
      */
-    public function newModelInstance(): object
+    public function newModelInstance(): Model
     {
         return new $this->model();
     }
@@ -40,7 +41,7 @@ class BaseRepository
      * @param  array  $attributes
      * @return object
      */
-    public function create(array $attributes): object
+    public function create(array $attributes): mixed
     {
         return $this->model
             ->create($attributes);
@@ -51,7 +52,7 @@ class BaseRepository
      * @param  int  $id
      * @return object
      */
-    public function update(array $attributes, int $id): object
+    public function update(array $attributes, int $id): mixed
     {
         // @phpstan-ignore-next-line
         return tap($this->model->find($id))->update($attributes);
@@ -75,7 +76,7 @@ class BaseRepository
      * @param  string  $sortBy
      * @return array|\Illuminate\Database\Eloquent\Collection
      */
-    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): array|\Illuminate\Database\Eloquent\Collection
+    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): array|Collection
     {
         return $this->model
             ->with($with)

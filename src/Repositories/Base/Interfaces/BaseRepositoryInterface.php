@@ -2,22 +2,23 @@
 
 namespace PropaySystems\LaravelBaseRepositories\Repositories\Base\Interfaces;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseRepositoryInterface
 {
-    public function newModelInstance(): object;
+    public function newModelInstance(): Model;
 
     public function model(): Model;
 
-    public function create(array $attributes): object;
+    public function create(array $attributes): mixed;
 
-    public function update(array $attributes, int $id): object;
+    public function update(array $attributes, int $id): mixed;
 
     public function updateOrCreate(array $search, array $attributes): mixed;
 
-    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'desc'): array|\Illuminate\Database\Eloquent\Collection;
+    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'desc'): array|Collection;
 
     public function find(int $id, array $with = []): mixed;
 
