@@ -16,7 +16,7 @@ interface BaseRepositoryInterface
 
     public function update(array $attributes, int $id): mixed;
 
-    public function updateWithUuid(array $attributes, int $id, string $column = 'id'): mixed;
+    public function updateWithUuid(array $attributes, string $id, string $column = 'id'): mixed;
 
     public function updateOrCreate(array $search, array $attributes): mixed;
 
