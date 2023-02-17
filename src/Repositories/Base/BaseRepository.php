@@ -47,6 +47,16 @@ class BaseRepository
         return tap($this->model->find($id))->update($attributes);
     }
 
+    public function updateWithUuid(array $attributes, int $id, string $column = 'id'): mixed
+    {
+        return tap($this->model->where($column, '=', $id))->update($attributes);
+    }
+
+    /**
+     * @param  array  $search
+     * @param  array  $attributes
+     * @return mixed
+     */
     public function updateOrCreate(array $search, array $attributes): mixed
     {
         return $this->model
