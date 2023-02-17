@@ -12,9 +12,6 @@ class CreateClassesCommand extends Command
 
     public $description = 'Create the relevant service or repository classes.';
 
-    /**
-     * @param  LaravelBaseRepositories  $laravelBaseRepositories
-     */
     public function __construct(
         protected LaravelBaseRepositories $laravelBaseRepositories
     ) {

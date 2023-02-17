@@ -13,32 +13,23 @@ class BaseRepository
 {
     /**
      * BaseRepository constructor.
-     *
-     * @param  Model  $model
      */
     public function __construct(
         protected Model $model
     ) {
     }
 
-    /**
-     * @return Model
-     */
     public function newModelInstance(): Model
     {
         return new $this->model();
     }
 
-    /**
-     * @return Model
-     */
     public function model(): Model
     {
         return $this->model;
     }
 
     /**
-     * @param  array  $attributes
      * @return object
      */
     public function create(array $attributes): mixed
@@ -48,14 +39,17 @@ class BaseRepository
     }
 
     /**
-     * @param  array  $attributes
-     * @param  int  $id
      * @return object
      */
     public function update(array $attributes, int $id): mixed
     {
         // @phpstan-ignore-next-line
         return tap($this->model->find($id))->update($attributes);
+    }
+
+    public function updateWithUuid(array $attributes, int $id, string $column = 'id'): mixed
+    {
+        return tap($this->model->where($column, '=', $id))->update($attributes);
     }
 
     /**
@@ -69,13 +63,6 @@ class BaseRepository
             ->updateOrCreate($search, $attributes);
     }
 
-    /**
-     * @param  array  $columns
-     * @param  array  $with
-     * @param  string  $orderBy
-     * @param  string  $sortBy
-     * @return array|\Illuminate\Database\Eloquent\Collection
-     */
     public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): array|Collection
     {
         return $this->model
@@ -84,11 +71,6 @@ class BaseRepository
             ->get($columns);
     }
 
-    /**
-     * @param  int  $id
-     * @param  array  $with
-     * @return mixed
-     */
     public function find(int $id, array $with = []): mixed
     {
         return $this->model
@@ -97,9 +79,6 @@ class BaseRepository
     }
 
     /**
-     * @param  int  $id
-     * @return mixed
-     *
      * @throws ModelNotFoundException
      */
     public function findOneOrFail(int $id): mixed
@@ -108,13 +87,6 @@ class BaseRepository
             ->findOrFail($id);
     }
 
-    /**
-     * @param  mixed  $data
-     * @param  array  $with
-     * @param  string  $orderBy
-     * @param  string  $sortBy
-     * @return mixed
-     */
     public function findBy(mixed $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
         return $this->model
@@ -124,11 +96,6 @@ class BaseRepository
             ->get();
     }
 
-    /**
-     * @param  array  $data
-     * @param  array  $with
-     * @return mixed
-     */
     public function findOneBy(array $data, array $with = []): mixed
     {
         return $this->model
@@ -138,9 +105,6 @@ class BaseRepository
     }
 
     /**
-     * @param  array  $data
-     * @return mixed
-     *
      * @throws ModelNotFoundException
      */
     public function findOneByOrFail(array $data): mixed
@@ -151,10 +115,6 @@ class BaseRepository
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $perPage
-     * @return LengthAwarePaginator
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -175,10 +135,6 @@ class BaseRepository
         );
     }
 
-    /**
-     * @param  int  $id
-     * @return bool
-     */
     public function delete(int $id): bool
     {
         return $this->model
@@ -186,14 +142,6 @@ class BaseRepository
             ->delete();
     }
 
-    /**
-     * @param  string  $column
-     * @param  array  $data
-     * @param  array  $with
-     * @param  string  $orderBy
-     * @param  string  $sortBy
-     * @return mixed
-     */
     public function whereIn(string $column, array $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
         return $this->model

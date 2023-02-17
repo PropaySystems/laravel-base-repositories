@@ -8,10 +8,6 @@ use PropaySystems\LaravelBaseRepositories\Helpers\FileHelper;
 
 class LaravelBaseRepositories
 {
-    /**
-     * @param  string  $file
-     * @return bool|string
-     */
     public function createServiceFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
@@ -22,10 +18,6 @@ class LaravelBaseRepositories
         return $folderPath;
     }
 
-    /**
-     * @param  string  $file
-     * @return bool|string
-     */
     public function createServiceClass(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
@@ -42,10 +34,6 @@ class LaravelBaseRepositories
         return $fullPath;
     }
 
-    /**
-     * @param  string  $file
-     * @return bool|string
-     */
     public function createInterfaceFolder(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
@@ -56,10 +44,6 @@ class LaravelBaseRepositories
         return $folderPath;
     }
 
-    /**
-     * @param  string  $file
-     * @return bool|string
-     */
     public function createInterfaceClass(string $file): bool|string
     {
         $parts = FileHelper::splitFile($file);
@@ -86,12 +70,6 @@ class LaravelBaseRepositories
         return $folderPath;
     }
 
-    /**
-     * @param  string  $file
-     * @param  string  $interfacePath
-     * @param  string  $model
-     * @return bool|string
-     */
     public function createRepositoryClass(string $file, string $interfacePath, string $model): bool|string
     {
         $parts = FileHelper::splitFile($file);
@@ -115,9 +93,6 @@ class LaravelBaseRepositories
         return $fullPath;
     }
 
-    /**
-     * @return string
-     */
     public function createProviderClass(): string
     {
         $fullPath = app_path('Providers/RepositoryServiceProvider.php');
@@ -129,9 +104,6 @@ class LaravelBaseRepositories
         return $fullPath;
     }
 
-    /**
-     * @return bool
-     */
     public function addProviderEntries(): bool
     {
         File::directories(config('base-repositories.base_repository_path'));
@@ -158,13 +130,9 @@ class LaravelBaseRepositories
     }
 
     /**
-     * @param $content
-     * @param $namespace
-     * @param $fileName
      * @param  null  $interface
      * @param  null  $interfacePath
      * @param  null  $model
-     * @return string
      */
     public function replaceVariables($content, $namespace, $fileName, $interface = null, $interfacePath = null, $model = null): string
     {
