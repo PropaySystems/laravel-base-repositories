@@ -14,6 +14,8 @@ interface BaseRepositoryInterface
 
     public function create(array $attributes): mixed;
 
+    public function firstOrCreate(array $search, array $attributes): mixed;
+
     public function update(array $attributes, int $id): mixed;
 
     public function updateWithUuid(array $attributes, string $id, string $column = 'id'): mixed;
@@ -26,15 +28,15 @@ interface BaseRepositoryInterface
 
     public function findOneOrFail(int $id): mixed;
 
-    public function findBy(array $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed;
+    public function findBy(array $attributes, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed;
 
-    public function findOneBy(array $data, array $with = []): mixed;
+    public function findOneBy(array $attributes, array $with = []): mixed;
 
-    public function findOneByOrFail(array $data): mixed;
+    public function findOneByOrFail(array $attributes): mixed;
 
-    public function paginateArrayResults(array $data, int $perPage = 50): LengthAwarePaginator;
+    public function paginateArrayResults(array $attributes, int $perPage = 50): LengthAwarePaginator;
 
     public function delete(int $id): bool;
 
-    public function whereIn(string $column, array $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed;
+    public function whereIn(string $column, array $attributes, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed;
 }

@@ -39,6 +39,17 @@ class BaseRepository
     }
 
     /**
+     * @param array $search
+     * @param array $attributes
+     * @return mixed
+     */
+    public function firstOrCreate(array $search, array $attributes): mixed
+    {
+        return $this->model
+            ->firstOrCreate($search, $attributes);
+    }
+
+    /**
      * @return object
      */
     public function update(array $attributes, int $id): mixed
@@ -93,19 +104,19 @@ class BaseRepository
             ->findOrFail($id);
     }
 
-    public function findBy(mixed $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
+    public function findBy(mixed $attributes, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
         return $this->model
-            ->where($data)
+            ->where($attributes)
             ->with($with)
             ->orderBy($orderBy, $sortBy)
             ->get();
     }
 
-    public function findOneBy(array $data, array $with = []): mixed
+    public function findOneBy(array $attributes, array $with = []): mixed
     {
         return $this->model
-            ->where($data)
+            ->where($attributes)
             ->with($with)
             ->first();
     }
@@ -113,10 +124,10 @@ class BaseRepository
     /**
      * @throws ModelNotFoundException
      */
-    public function findOneByOrFail(array $data): mixed
+    public function findOneByOrFail(array $attributes): mixed
     {
         return $this->model
-            ->where($data)
+            ->where($attributes)
             ->firstOrFail();
     }
 
@@ -124,14 +135,14 @@ class BaseRepository
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function paginateArrayResults(array $data, int $perPage = 50): LengthAwarePaginator
+    public function paginateArrayResults(array $attributes, int $perPage = 50): LengthAwarePaginator
     {
         $page = request()->get('page', 1);
         $offset = ($page * $perPage) - $perPage;
 
         return new LengthAwarePaginator(
-            array_slice($data, $offset, $perPage, false),
-            count($data),
+            array_slice($attributes, $offset, $perPage, false),
+            count($attributes),
             $perPage,
             $page,
             [
@@ -141,6 +152,10 @@ class BaseRepository
         );
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function delete(int $id): bool
     {
         return $this->model
@@ -148,10 +163,18 @@ class BaseRepository
             ->delete();
     }
 
-    public function whereIn(string $column, array $data, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
+    /**
+     * @param string $column
+     * @param array $attributes
+     * @param array $with
+     * @param string $orderBy
+     * @param string $sortBy
+     * @return mixed
+     */
+    public function whereIn(string $column, array $attributes, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
         return $this->model
-            ->whereIn($column, $data)
+            ->whereIn($column, $attributes)
             ->with($with)
             ->orderBy($orderBy, $sortBy)
             ->get();
