@@ -21,6 +21,15 @@ interface AddressRepositoryInterface extends BaseRepositoryInterface
 PHP 8.0+ \
 Laravel 7+
 
+## Version Compatibility
+
+ Laravel  | BaseRepositories
+:---------|:---------
+ 8.x      | 0.0.7
+ 9.x      | 0.0.3
+ 10.x     | 0.0.6      
+
+
 ## Installation
 
 You can install the package via composer:

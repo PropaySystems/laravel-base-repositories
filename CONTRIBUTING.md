@@ -49,6 +49,6 @@ project and add to the composer.json:
 }
 ```
 
-After added this configuration you can install the wireui project as a local dependency
+After added this configuration you can install the laravel-base-repositories project as a local dependency
 using ` composer require propaysystems/laravel-base-repositories `, so when you change the laravel-base-repositories source code
 it will be reflected on your laravel package.
