@@ -2,6 +2,7 @@
 
 namespace PropaySystems\LaravelBaseRepositories\Repositories\Base;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -19,11 +20,17 @@ class BaseRepository
     ) {
     }
 
+    /**
+     * @return Model
+     */
     public function newModelInstance(): Model
     {
         return new $this->model();
     }
 
+    /**
+     * @return Model
+     */
     public function model(): Model
     {
         return $this->model;
@@ -70,6 +77,18 @@ class BaseRepository
     }
 
     /**
+     * @param  array  $where
+     * @param  array  $attributes
+     * @return int
+     */
+    public function updateWhere(array $where, array $attributes): int
+    {
+        return $this->model
+            ->where($where)
+            ->update($attributes);
+    }
+
+    /**
      * @param  array  $search
      * @param  array  $attributes
      * @return mixed
@@ -80,7 +99,14 @@ class BaseRepository
             ->updateOrCreate($search, $attributes);
     }
 
-    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): array|Collection
+    /**
+     * @param array $columns
+     * @param array $with
+     * @param string $orderBy
+     * @param string $sortBy
+     * @return Builder[]|Collection
+     */
+    public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): Collection|array
     {
         return $this->model
             ->with($with)
@@ -88,6 +114,11 @@ class BaseRepository
             ->get($columns);
     }
 
+    /**
+     * @param int $id
+     * @param array $with
+     * @return mixed
+     */
     public function find(int $id, array $with = []): mixed
     {
         return $this->model
@@ -104,6 +135,13 @@ class BaseRepository
             ->findOrFail($id);
     }
 
+    /**
+     * @param mixed $attributes
+     * @param array $with
+     * @param string $orderBy
+     * @param string $sortBy
+     * @return mixed
+     */
     public function findBy(mixed $attributes, array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): mixed
     {
         return $this->model
@@ -113,6 +151,11 @@ class BaseRepository
             ->get();
     }
 
+    /**
+     * @param array $attributes
+     * @param array $with
+     * @return mixed
+     */
     public function findOneBy(array $attributes, array $with = []): mixed
     {
         return $this->model
@@ -129,6 +172,21 @@ class BaseRepository
         return $this->model
             ->where($attributes)
             ->firstOrFail();
+    }
+
+    /**
+     * @param string $attribute
+     * @param int|string $value
+     * @param string $orderBy
+     * @param string $sortBy
+     * @return Builder[]|Collection
+     */
+    public function findWhereLike(string $attribute, int|string $value, string $orderBy = 'id', string $sortBy = 'asc'): Collection|array
+    {
+        return $this->model->query()
+            ->where($attribute, 'LIKE', "%{$value}%")
+            ->orderBy($orderBy, $sortBy)
+            ->get();
     }
 
     /**
@@ -154,13 +212,40 @@ class BaseRepository
 
     /**
      * @param int $id
+     * @param bool $forceDelete
      * @return bool
      */
-    public function delete(int $id): bool
+    public function delete(int $id, bool $forceDelete = false): bool
     {
-        return $this->model
-            ->find($id)
-            ->delete();
+        $query = $this->model
+            ->find($id);
+
+        if($forceDelete) {
+            $query->forceDelete();
+        } else {
+            $query->delete();
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param array $attributes
+     * @param bool $forceDelete
+     * @return bool
+     */
+    public function deleteWhere(array $attributes, bool $forceDelete = false): bool
+    {
+        $query = $this->model
+            ->where($attributes);
+
+        if($forceDelete) {
+            $query->forceDelete();
+        } else {
+            $query->delete();
+        }
+
+        return $query;
     }
 
     /**
