@@ -217,16 +217,11 @@ class BaseRepository
      */
     public function delete(int $id, bool $forceDelete = false): bool
     {
-        $query = $this->model
-            ->find($id);
-
-        if($forceDelete) {
-            $query->forceDelete();
-        } else {
-            $query->delete();
+        if ($forceDelete) {
+            return $this->model->find($id)->forceDelete();
         }
 
-        return $query;
+        return $this->model->find($id)->delete();
     }
 
     /**
@@ -236,16 +231,11 @@ class BaseRepository
      */
     public function deleteWhere(array $attributes, bool $forceDelete = false): bool
     {
-        $query = $this->model
-            ->where($attributes);
-
-        if($forceDelete) {
-            $query->forceDelete();
-        } else {
-            $query->delete();
+        if ($forceDelete) {
+            return $this->model->where($attributes)->forceDelete();
         }
 
-        return $query;
+        return $this->model->where($attributes)->delete();
     }
 
     /**
