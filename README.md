@@ -1,11 +1,15 @@
+<img src="https://d324x4ew3y6tnn.cloudfront.net/packages/banners/propaysystems-base-repositories.png" alt="Propay Systems">
+
 # Base elequent repositories with interfaces for common queries.
 
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/propaysystems/laravel-base-repositories/run-tests?label=tests)](https://github.com/propaysystems/laravel-base-repositories/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/propaysystems/laravel-base-repositories/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/propaysystems/laravel-base-repositories/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/propaysystems/laravel-base-repositories.svg?style=flat-square)](https://packagist.org/packages/propaysystems/laravel-base-repositories)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/propaysystems/laravel-base-repositories/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/propaysystems/laravel-base-repositories/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/propaysystems/laravel-base-repositories/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/propaysystems/utilities/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/propaysystems/laravel-base-repositories.svg?style=flat-square)](https://packagist.org/packages/propaysystems/laravel-base-repositories)
 
 # UNDER DEVELOPMENT AND TESTING - WE WILL ADD PROPER DOCUMENTATION WITH v1 STABLE RELEASE
 
-This is the base classes for the repository pattern we use. In your own repository classes you have to extend the BaseRepository and implement your custom 
+This is the base classes & helper commands for the repository pattern we use. In your own repository classes you have to extend the BaseRepository and implement your custom 
 interface. In your custom interface you have to extend the BaseRepositoryInterface. This will give you a collection of commonly used queries and function 
 that you don't need to duplicate each time. 
 

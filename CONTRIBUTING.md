@@ -4,7 +4,7 @@
 
 Please, make sure you have taken a look on [our documentation](https://docs.propay.co.za/).
 
-Are you with problem with one of ours components? The best way to reach us is to
+If there is a problem with one of ours components? The best way to reach us is to
 open a new issue, we just ask you to search if your problem was discussed before
 and if so continue the discussion there.
 
