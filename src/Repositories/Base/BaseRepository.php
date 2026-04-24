@@ -2,7 +2,6 @@
 
 namespace PropaySystems\LaravelBaseRepositories\Repositories\Base;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -100,11 +99,9 @@ class BaseRepository
     }
 
     /**
-     * @param array $columns
-     * @param array $with
-     * @param string $orderBy
-     * @param string $sortBy
-     * @return Builder[]|Collection
+     * @param  array<int, string>  $columns
+     * @param  array<int, string>  $with
+     * @return Collection<int, Model>
      */
     public function all(array $columns = ['*'], array $with = [], string $orderBy = 'id', string $sortBy = 'asc'): Collection|array
     {
@@ -175,11 +172,7 @@ class BaseRepository
     }
 
     /**
-     * @param string $attribute
-     * @param int|string $value
-     * @param string $orderBy
-     * @param string $sortBy
-     * @return Builder[]|Collection
+     * @return Collection<int, Model>
      */
     public function findWhereLike(string $attribute, int|string $value, string $orderBy = 'id', string $sortBy = 'asc'): Collection|array
     {
@@ -195,7 +188,7 @@ class BaseRepository
      */
     public function paginateArrayResults(array $attributes, int $perPage = 50): LengthAwarePaginator
     {
-        $page = request()->get('page', 1);
+        $page = request()->input('page', 1);
         $offset = ($page * $perPage) - $perPage;
 
         return new LengthAwarePaginator(
